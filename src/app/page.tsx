@@ -546,7 +546,7 @@ export default function Home() {
             'flex flex-col md:flex-row items-center justify-between py-4 px-6 glass-panel rounded-xl my-5'
           }
         >
-          <div className="flex items-center w-full justify-between mb-4 md:mb-0">
+          <div className="flex flex-col md:flex-row items-center w-full justify-between mb-2 md:mb-0">
             <h1 className="text-normal font-semibold">
               {' '}
               {new Date().getFullYear()} &copy; Disperindag Prov. Lampung
