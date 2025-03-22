@@ -302,7 +302,9 @@ export default function Home() {
               <AnimatedNumber
                 duration={100}
                 value={selectedCommodityPrice.price}
-                formatValue={(val) => `Rp. ${val.toFixed(2)}`}
+                formatValue={(val) =>
+                  `Rp. ${val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+                }
               />
             </span>
           </div>
@@ -327,7 +329,9 @@ export default function Home() {
                 <AnimatedNumber
                   duration={100}
                   value={Math.abs(selectedCommodityPrice.changePercentage)}
-                  formatValue={(val) => `${val.toFixed(2)}%`}
+                  formatValue={(val) =>
+                    `${val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%`
+                  }
                 />
               </div>
             </div>
@@ -344,7 +348,9 @@ export default function Home() {
             <AnimatedNumber
               duration={70}
               value={totalCommodities}
-              formatValue={(val) => val.toString()}
+              formatValue={(val) =>
+                val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+              }
             />
           </span>
         </div>
@@ -363,7 +369,11 @@ export default function Home() {
                 <AnimatedNumber
                   duration={70}
                   value={highestPriceCommodity.priceData.price}
-                  formatValue={(val) => `Rp. ${val.toFixed(2)}`}
+                  formatValue={(val) =>
+                    `Rp. ${val
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+                  }
                 />
               </span>
             </div>
@@ -384,7 +394,11 @@ export default function Home() {
                 <AnimatedNumber
                   duration={70}
                   value={lowestPriceCommodity.priceData.price}
-                  formatValue={(val) => `Rp. ${val.toFixed(2)}`}
+                  formatValue={(val) =>
+                    `Rp. ${val
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+                  }
                 />
               </span>
             </div>
@@ -452,7 +466,7 @@ export default function Home() {
           <div className="lg:col-span-1">
             <FilterPanel
               onFilterChange={handleFilterChange}
-              className="animate-fade-in animate-delay-200 sticky top-6"
+              className="animate-fade-in animate-delay-200 top-6 overflow-hidden"
             />
 
             <div className="mt-6 glass-panel rounded-xl p-4 animate-fade-in animate-delay-300">

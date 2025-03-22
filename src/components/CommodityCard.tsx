@@ -53,7 +53,9 @@ const CommodityCard = ({
           <AnimatedNumber
             value={priceData.price}
             duration={250}
-            formatValue={(val) => `Rp. ${val.toFixed(2)}`}
+            formatValue={(val) =>
+              `Rp. ${val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+            }
           />
           <span className="text-xs ml-1">/ {commodity.unit}</span>
         </div>
@@ -72,7 +74,9 @@ const CommodityCard = ({
             <AnimatedNumber
               duration={250}
               value={Math.abs(priceData.changePercentage)}
-              formatValue={(val) => `${val.toFixed(2)}%`}
+              formatValue={(val) =>
+                `${val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%`
+              }
               className="ml-1 text-sm"
             />
           </motion.div>

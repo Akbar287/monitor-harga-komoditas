@@ -42,7 +42,7 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
             />
             <span className="text-xs font-medium">{entry.name}: </span>
             <span className="text-xs ml-1 font-semibold">
-              ${entry.value.toFixed(2)}
+              Rp.{entry.value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </span>
           </div>
         ))}
@@ -60,6 +60,7 @@ export const PriceChart = ({ data, title, className }: PriceChartProps) => {
   useEffect(() => {
     // Reset the animation when data changes
     setAnimatedData([])
+    console.log(data)
 
     // Create a deep copy of the data with empty data points
     const initialData = data.map((series) => ({
@@ -106,7 +107,7 @@ export const PriceChart = ({ data, title, className }: PriceChartProps) => {
             stroke={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.2)'}
           />
           <YAxis
-            tickFormatter={(value) => `$${value}`}
+            tickFormatter={(value) => `Rp.${value}`}
             tick={{ fontSize: 12 }}
             stroke={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.2)'}
           />

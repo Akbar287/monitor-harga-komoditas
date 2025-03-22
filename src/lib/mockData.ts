@@ -66,19 +66,19 @@ const generatePriceData = (): PriceData[] => {
     locations.forEach(location => {
       let basePrice = 0;
       switch (commodity.id) {
-        case 'com-1': basePrice = 750; break;
-        case 'com-2': basePrice = 450; break;
-        case 'com-3': basePrice = 1200; break;
-        case 'com-4': basePrice = 1800; break;
-        case 'com-5': basePrice = 180; break;
-        case 'com-6': basePrice = 90; break;
-        case 'com-7': basePrice = 25; break;
-        case 'com-8': basePrice = 1900; break;
-        case 'com-9': basePrice = 24; break;
-        case 'com-10': basePrice = 4; break;
-        case 'com-11': basePrice = 75; break;
-        case 'com-12': basePrice = 3; break;
-        default: basePrice = 100;
+        case 'com-1': basePrice = 15000; break;
+        case 'com-2': basePrice = 12500; break;
+        case 'com-3': basePrice = 12700; break;
+        case 'com-4': basePrice = 14400; break;
+        case 'com-5': basePrice = 13600; break;
+        case 'com-6': basePrice = 13950; break;
+        case 'com-7': basePrice = 12576; break;
+        case 'com-8': basePrice = 19000; break;
+        case 'com-9': basePrice = 24000; break;
+        case 'com-10': basePrice = 45400; break;
+        case 'com-11': basePrice = 35644; break;
+        case 'com-12': basePrice = 30500; break;
+        default: basePrice = 10000;
       }
       
       const locationMultiplier = 

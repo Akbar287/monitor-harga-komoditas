@@ -106,6 +106,7 @@ const DetailedReportModal = ({
                           <span className="font-medium text-primary">
                             Rp.&nbsp;
                             <AnimatedNumber
+                              duration={200}
                               value={
                                 Object.values(locationPrices)
                                   .flat()
@@ -115,7 +116,11 @@ const DetailedReportModal = ({
                                   ) /
                                 Object.values(locationPrices).flat().length
                               }
-                              formatValue={(val) => val.toFixed(2)}
+                              formatValue={(val) =>
+                                val
+                                  .toFixed(2)
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                              }
                             />
                           </span>
                         </div>
@@ -126,12 +131,17 @@ const DetailedReportModal = ({
                           <span className="font-medium text-primary">
                             Rp.&nbsp;
                             <AnimatedNumber
+                              duration={200}
                               value={Math.max(
                                 ...Object.values(locationPrices)
                                   .flat()
                                   .map((price) => price.price)
                               )}
-                              formatValue={(val) => val.toFixed(2)}
+                              formatValue={(val) =>
+                                val
+                                  .toFixed(2)
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                              }
                             />
                           </span>
                         </div>
@@ -142,12 +152,17 @@ const DetailedReportModal = ({
                           <span className="font-medium text-primary">
                             Rp.&nbsp;
                             <AnimatedNumber
+                              duration={200}
                               value={Math.min(
                                 ...Object.values(locationPrices)
                                   .flat()
                                   .map((price) => price.price)
                               )}
-                              formatValue={(val) => val.toFixed(2)}
+                              formatValue={(val) =>
+                                val
+                                  .toFixed(2)
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                              }
                             />
                           </span>
                         </div>
@@ -192,7 +207,10 @@ const DetailedReportModal = ({
                             </div>
                             <div className="flex items-center space-x-4">
                               <span className="font-medium text-primary">
-                                Rp.{priceData.price.toFixed(2)}
+                                Rp.
+                                {priceData.price
+                                  .toFixed(2)
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                               </span>
                               {priceData.changePercentage && (
                                 <span
@@ -207,9 +225,9 @@ const DetailedReportModal = ({
                                   ) : (
                                     <ArrowDownIcon size={14} className="mr-1" />
                                   )}
-                                  {Math.abs(priceData.changePercentage).toFixed(
-                                    2
-                                  )}
+                                  {Math.abs(priceData.changePercentage)
+                                    .toFixed(2)
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                   %
                                 </span>
                               )}
