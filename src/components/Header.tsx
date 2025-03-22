@@ -1,16 +1,19 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { BarChart3, Search, Sun } from 'lucide-react'
-import { Input } from '@/components/ui/input'
+import { ListFilter, Sun, Moon, User2Icon } from 'lucide-react'
 import Image from 'next/image'
 import Logo from '../../public/logo_disperindag.png'
 import { Button } from './ui/button'
+import { useTheme } from 'next-themes'
+import Link from 'next/link'
 
 interface HeaderProps {
   className?: string
+  setAllCommoditiesOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Header = ({ className }: HeaderProps) => {
+export const Header = ({ className, setAllCommoditiesOpen }: HeaderProps) => {
+  const { theme, setTheme } = useTheme()
   return (
     <header
       className={cn(
@@ -31,14 +34,39 @@ export const Header = ({ className }: HeaderProps) => {
         <h1 className="text-xl font-semibold"></h1>
       </div>
 
-      <div className="flex justify-between items-center w-full md:w-auto">
-        <div className="relative w-full md:w-auto">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Cari Komoditas..."
-            className="pl-9 pr-4 w-full md:w-[250px] lg:w-[300px] bg-background/50"
-          />
-        </div>
+      <div className="flex justify-center space-x-1 items-center w-full md:w-auto">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setAllCommoditiesOpen(true)}
+          className="text-xs"
+        >
+          <ListFilter className="h-3.5 w-3.5 mr-1" />
+          Semua Komoditas
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="text-xs"
+        >
+          {theme === 'dark' ? (
+            <Moon className="h-3.5 w-3.5 mr-1" />
+          ) : (
+            <Sun className="h-3.5 w-3.5 mr-1" />
+          )}
+        </Button>
+        <Link href={'/'}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => alert('Belum dibuat\nHanya Prototipe saja')}
+            className="text-xs"
+          >
+            <User2Icon className="h-3.5 w-3.5 mr-1" />
+            Login
+          </Button>
+        </Link>
       </div>
     </header>
   )

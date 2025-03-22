@@ -291,7 +291,7 @@ export const FilterPanel = ({
               variant={filters.locationType === type ? 'default' : 'outline'}
               size="sm"
               onClick={() => handleLocationTypeChange(type)}
-              className="animate-scale-in"
+              className="animate-scale-in dark:text-white"
               style={{
                 animationDelay: `${
                   (

@@ -11,6 +11,7 @@ import {
 } from 'recharts'
 import { ChartData } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { useTheme } from 'next-themes'
 
 interface PriceChartProps {
   data: ChartData[]
@@ -53,6 +54,8 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 
 export const PriceChart = ({ data, title, className }: PriceChartProps) => {
   const [animatedData, setAnimatedData] = useState<ChartData[]>([])
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   useEffect(() => {
     // Reset the animation when data changes
@@ -92,17 +95,20 @@ export const PriceChart = ({ data, title, className }: PriceChartProps) => {
           }
           margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'}
+          />
           <XAxis
             dataKey="date"
             tickFormatter={formatXAxis}
             tick={{ fontSize: 12 }}
-            stroke="rgba(0,0,0,0.2)"
+            stroke={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.2)'}
           />
           <YAxis
             tickFormatter={(value) => `$${value}`}
             tick={{ fontSize: 12 }}
-            stroke="rgba(0,0,0,0.2)"
+            stroke={isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.2)'}
           />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: 15 }} />

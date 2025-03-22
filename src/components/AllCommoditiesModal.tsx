@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Commodity } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { Search } from 'lucide-react'
@@ -41,7 +41,10 @@ const AllCommoditiesModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl lg:min-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+      <DialogContent
+        aria-describedby="komoditas"
+        className="max-w-3xl lg:min-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
+      >
         <DialogHeader>
           <DialogTitle className="text-xl">Semua Komoditas</DialogTitle>
         </DialogHeader>
@@ -58,7 +61,7 @@ const AllCommoditiesModal = ({
           </div>
         </div>
 
-        <ScrollArea className="flex-1">
+        <ScrollArea className="flex-1 overflow-auto pr-4">
           <div className="space-y-6">
             {categories.map((category) => {
               const categoryCommodities = filteredCommodities.filter(
@@ -109,6 +112,7 @@ const AllCommoditiesModal = ({
               </div>
             )}
           </div>
+          <ScrollBar orientation="vertical" />
         </ScrollArea>
       </DialogContent>
     </Dialog>

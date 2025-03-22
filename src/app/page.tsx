@@ -24,16 +24,13 @@ import {
   ArrowUpIcon,
   Info,
   ListFilter,
-  MoonIcon,
-  SunIcon,
+  X,
 } from 'lucide-react'
-import { useTheme } from 'next-themes'
+import { Separator } from '@/components/ui/separator'
 
 export default function Home() {
   const searchParams = useSearchParams()
   const router = useRouter()
-
-  const { theme, setTheme } = useTheme()
 
   const [filters, setFilters] = useState<FilterState>({
     locationType: 'Nasional',
@@ -148,7 +145,7 @@ export default function Home() {
         }
       })
 
-      console.log('New chart data:', newChartData)
+      // console.log('New chart data:', newChartData)
 
       setChartData(newChartData)
     }
@@ -340,7 +337,7 @@ export default function Home() {
     }
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Total Komoditas</span>
           <span className="font-semibold">
@@ -351,13 +348,14 @@ export default function Home() {
             />
           </span>
         </div>
+        <Separator />
 
         {highestPriceCommodity && (
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col justify-start">
             <span className="text-sm text-muted-foreground">
               Harga Tertinggi
             </span>
-            <div className="flex items-center">
+            <div className="flex items-center justify-between">
               <span className="font-semibold mr-1">
                 {highestPriceCommodity.commodity.name}:
               </span>
@@ -371,13 +369,14 @@ export default function Home() {
             </div>
           </div>
         )}
+        <Separator />
 
         {lowestPriceCommodity && (
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col justify-start">
             <span className="text-sm text-muted-foreground">
               Harga Terendah
             </span>
-            <div className="flex items-center">
+            <div className="flex items-center justify-between">
               <span className="font-semibold mr-1">
                 {lowestPriceCommodity.commodity.name}:
               </span>
@@ -391,13 +390,14 @@ export default function Home() {
             </div>
           </div>
         )}
+        <Separator />
 
         {biggestIncrease && biggestIncrease.priceData.changePercentage! > 0 && (
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col justify-start">
             <span className="text-sm text-muted-foreground">
               Persentase Tertinggi
             </span>
-            <div className="flex items-center">
+            <div className="flex items-center justify-between">
               <span className="font-semibold mr-1">
                 {biggestIncrease.commodity.name}:
               </span>
@@ -412,13 +412,14 @@ export default function Home() {
             </div>
           </div>
         )}
+        <Separator />
 
         {biggestDecrease && biggestDecrease.priceData.changePercentage! < 0 && (
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col justify-start">
             <span className="text-sm text-muted-foreground">
               Persentase Terendah
             </span>
-            <div className="flex items-center">
+            <div className="flex items-center justify-between">
               <span className="font-semibold mr-1">
                 {biggestDecrease.commodity.name}:
               </span>
@@ -442,7 +443,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 dark:from-green-100/10  to-red-200 dark:to-red-200/10 via-indigo-100 dark:via-indigo-100/10">
       <div className="container mx-auto py-6 px-4 max-w-7xl">
-        <Header className="animate-fade-in" />
+        <Header
+          className="animate-fade-in"
+          setAllCommoditiesOpen={setAllCommoditiesOpen}
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1">
@@ -454,15 +458,27 @@ export default function Home() {
             <div className="mt-6 glass-panel rounded-xl p-4 animate-fade-in animate-delay-300">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">Ringkasan Pasar</h2>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setAllCommoditiesOpen(true)}
-                  className="text-xs"
-                >
-                  <ListFilter className="h-3.5 w-3.5 mr-1" />
-                  Semua Komoditas
-                </Button>
+                {selectedCommodityId !== undefined ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSelectedCommodityId(undefined)}
+                    className="text-xs"
+                  >
+                    <X className="h-3.5 w-3.5 mr-1" />
+                    Bersihkan
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setAllCommoditiesOpen(true)}
+                    className="text-xs"
+                  >
+                    <ListFilter className="h-3.5 w-3.5 mr-1" />
+                    Komoditas
+                  </Button>
+                )}
               </div>
 
               {renderMarketOverview()}
@@ -485,7 +501,7 @@ export default function Home() {
               <div className="flex flex-col md:flex-row md:items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-semibold">
-                    {selectedLocation?.name || 'Nasional'} Pasar
+                    Pasar {selectedLocation?.name || 'Nasional'}
                   </h2>
                   <p className="text-muted-foreground mt-1">
                     {getTimeRangeDescription()} tren harga{' '}
@@ -589,13 +605,6 @@ export default function Home() {
         onSelect={handleCommoditySelect}
         selectedCommodityId={selectedCommodityId}
       />
-      <Button
-        variant="default"
-        className="fixed bottom-10 right-10 rounded-4xl bg-gray-500 w-12 h-12 cursor-pointer shadow-lg hover:bg-gray-600 transition-colors duration-300"
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      >
-        {theme === 'dark' ? <MoonIcon /> : <SunIcon />}
-      </Button>
     </div>
   )
 }

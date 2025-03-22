@@ -36,7 +36,7 @@ const TimeRangeSelector = ({
   return (
     <div className={cn('space-y-3', className)}>
       <div className="flex justify-between items-center">
-        <label className="text-sm font-medium">Time Range</label>
+        <label className="text-sm font-medium">Waktu</label>
         {timeRangeType === 'Kustom' && (
           <span className="text-xs text-muted-foreground">
             {dateRange[0] && dateRange[1]
@@ -55,17 +55,15 @@ const TimeRangeSelector = ({
         onValueChange={(value) => {
           if (value) onTimeRangeTypeChange(value as TimeRangeType)
         }}
-        className="justify-start"
+        className="justify-center"
       >
         <ToggleGroupItem
           value="Hari"
           aria-label="Toggle day view"
-          className={`${
-            timeRangeType === 'Hari' ? 'bg-muted-foreground' : ''
-          } flex items-center gap-1`}
+          className={`flex items-center gap-1`}
         >
           <Clock className="h-4 w-4" />
-          <span className="hidden sm:inline">Hari</span>
+          <span className=" sm:inline">Hari</span>
         </ToggleGroupItem>
         <ToggleGroupItem
           value="Minggu"
@@ -73,7 +71,7 @@ const TimeRangeSelector = ({
           className="flex items-center gap-1"
         >
           <Calendar className="h-4 w-4" />
-          <span className="hidden sm:inline">Minggu</span>
+          <span className=" sm:inline">Minggu</span>
         </ToggleGroupItem>
         <ToggleGroupItem
           value="Bulan"
@@ -81,7 +79,7 @@ const TimeRangeSelector = ({
           className="flex items-center gap-1"
         >
           <CalendarDays className="h-4 w-4" />
-          <span className="hidden sm:inline">Bulan</span>
+          <span className=" sm:inline">Bulan</span>
         </ToggleGroupItem>
         <ToggleGroupItem
           value="Kustom"
@@ -89,7 +87,7 @@ const TimeRangeSelector = ({
           className="flex items-center gap-1"
         >
           <CalendarRange className="h-4 w-4" />
-          <span className="hidden sm:inline">Kustom</span>
+          <span className=" sm:inline">Kustom</span>
         </ToggleGroupItem>
       </ToggleGroup>
 
