@@ -30,9 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Suspense fallback={<div>Loading search...</div>}>
-            {children}
-          </Suspense>
+          {children}
         </ThemeProvider>
         <Toaster />
       </body>
